@@ -1,7 +1,8 @@
-'use client'
+'use client';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import {useEffect} from "react";
 
 
 type Location ={
@@ -25,6 +26,18 @@ const locations: Location[] = [
 ]
 
 const MapPage = () => {
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            // Fix for Leaflet icons not displaying
+            delete (L.Icon.Default.prototype as any)._getIconUrl
+            L.Icon.Default.mergeOptions({
+                iconRetinaUrl: '/marker-icon-2x.png',
+                iconUrl: '/marker-icon.png',
+                shadowUrl: '/marker-shadow.png',
+            })
+        }
+    }, [])
 
     const getMarkerColor = (type: Location['type']) => {
         switch (type) {
