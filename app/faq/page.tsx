@@ -4,24 +4,24 @@ import ChatSection from "@/components/ChatSection";
 const FAQPage = () => {
     const faqs = [
         {
-            question: "What is your return policy?",
-            answer: "We offer a 30-day return policy for all unused items in their original packaging. Please contact our customer service team to initiate a return."
+            question: "What is the Shuttle schedule?",
+            answer: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         },
         {
-            question: "How long does shipping take?",
-            answer: "Shipping times vary depending on your location. Typically, domestic orders are delivered within 3-5 business days, while international orders may take 7-14 business days."
+            question: "Where can I find the transportation schedule?",
+            answer: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         },
         {
-            question: "Do you offer international shipping?",
-            answer: "Yes, we ship to most countries worldwide. Shipping costs and delivery times may vary depending on the destination."
+            question: "When are trimester results published?",
+            answer: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         },
         {
-            question: "How can I track my order?",
-            answer: "Once your order has been shipped, you will receive a confirmation email with a tracking number. You can use this number to track your package on our website or the carrier's site."
+            question: "Where and when can i register to join clubs?",
+            answer: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         },
         {
-            question: "What payment methods do you accept?",
-            answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay."
+            question: "Where are the study rooms, prayer rooms, common rooms located?",
+            answer: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
     ]
     return (
