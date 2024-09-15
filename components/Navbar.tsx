@@ -14,8 +14,8 @@ const PageLinks=[
         href: "/map"
     },
     {
-        title: "Event Calendar",
-        href: "/calendar"
+        title: "Events",
+        href: "/events"
     },
     {
         title: "Faculty",
