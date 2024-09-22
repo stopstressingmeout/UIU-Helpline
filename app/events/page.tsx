@@ -5,7 +5,7 @@ import EventsAddAndManage from "@/components/EventsAddAndManage";
 
 const EventsPage = async () => {
 
-    const {rows} = await sql`SELECT * FROM events`
+    const {rows} = await sql`SELECT * FROM events ORDER BY start_date DESC`
     const events = rows as EventType[]
 
 

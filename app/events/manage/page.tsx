@@ -11,7 +11,7 @@ import {deleteEvent} from "@/actions";
 const ManageEventsPage = async () => {
     const user = await currentUser();
     if (!user) return null;
-    const {rows} = await sql`SELECT * FROM events WHERE creator = ${user.id}`
+    const {rows} = await sql`SELECT * FROM events WHERE creator = ${user.id} ORDER BY start_date DESC`
     const events = rows as EventType[]
 
     const handleDelete = async (data:FormData) => {
