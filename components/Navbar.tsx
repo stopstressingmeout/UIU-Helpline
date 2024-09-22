@@ -18,6 +18,10 @@ const PageLinks=[
         href: "/events"
     },
     {
+        title: "Housing",
+        href: "/housing"
+    },
+    {
         title: "Faculty",
         href: "/faculty"
     },

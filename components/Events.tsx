@@ -29,13 +29,13 @@ function Events({events}: { events: EventType[] }) {
             </Tabs>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredEvents.map((event) => (
-                    <Card key={event.id}>
+                    <Card key={event.event_id}>
                         <CardHeader className="relative">
                             {/*<img src={event.image} alt={event.title} className="w-full h-40 object-cover rounded-t-lg"/>*/}
                             <CardTitle className="text-xl">{event.title}</CardTitle>
                             <CardDescription>{event.category.toUpperCase()}</CardDescription>
                             {
-                                new Date(event.start_date).toDateString() == new Date().toDateString() && (
+                                new Date(event.event_date).toDateString() == new Date().toDateString() && (
                                     <Badge className={`bg-green-400 absolute right-0 top-0 mr-2`} variant="default">Today</Badge>)
                             }
 
@@ -45,7 +45,7 @@ function Events({events}: { events: EventType[] }) {
                             <div className="space-y-2">
                                 <div className="flex items-center">
                                     <Calendar className="mr-2 h-4 w-4"/>
-                                    <span>{new Date(event.start_date).toDateString()}</span>
+                                    <span>{new Date(event.event_date).toDateString()}</span>
                                 </div>
                                 <div className="flex items-center">
                                     <Clock className="mr-2 h-4 w-4"/>
@@ -87,7 +87,7 @@ function Events({events}: { events: EventType[] }) {
             {/*            <Card key={event.id}>*/}
             {/*                <CardHeader>*/}
             {/*                    <CardTitle>{event.title}</CardTitle>*/}
-            {/*                    <CardDescription>{event.start_date.toDateString()}</CardDescription>*/}
+            {/*                    <CardDescription>{event.event_date.toDateString()}</CardDescription>*/}
             {/*                </CardHeader>*/}
             {/*            </Card>*/}
             {/*        ))}*/}

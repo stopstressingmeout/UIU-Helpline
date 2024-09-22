@@ -6,12 +6,12 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {Button} from "@/components/ui/button";
 import {Calendar, Clock, MapPin, User} from "lucide-react";
 import {convertTo12HourFormat} from "@/lib/helpers";
-import {deleteEvent} from "@/actions";
+import {deleteEvent} from "@/lib/actions";
 
 const ManageEventsPage = async () => {
     const user = await currentUser();
     if (!user) return null;
-    const {rows} = await sql`SELECT * FROM events WHERE creator = ${user.id} ORDER BY start_date DESC`
+    const {rows} = await sql`SELECT * FROM events WHERE creator_id = ${user.id} ORDER BY event_date DESC`
     const events = rows as EventType[]
 
     const handleDelete = async (data:FormData) => {
@@ -27,7 +27,7 @@ const ManageEventsPage = async () => {
                 events.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {events.map((event) => (
-                            <Card key={event.id}>
+                            <Card key={event.event_id}>
                                 <CardHeader className="relative">
                                     <CardTitle className="text-xl">{event.title}</CardTitle>
                                     <CardDescription>{event.category.toUpperCase()}</CardDescription>
@@ -36,7 +36,7 @@ const ManageEventsPage = async () => {
                                     <div className="space-y-2">
                                         <div className="flex items-center">
                                             <Calendar className="mr-2 h-4 w-4"/>
-                                            <span>{new Date(event.start_date).toDateString()}</span>
+                                            <span>{new Date(event.event_date).toDateString()}</span>
                                         </div>
                                         <div className="flex items-center">
                                             <Clock className="mr-2 h-4 w-4"/>
@@ -55,7 +55,7 @@ const ManageEventsPage = async () => {
 
                                 <CardFooter className="">
                                     <form action={handleDelete}>
-                                        <input type="hidden" name="eventId" value={event.id}/>
+                                        <input type="hidden" name="eventId" value={event.event_id}/>
                                         <Button type={"submit"} variant="destructive" size="default">Delete</Button>
                                     </form>
 

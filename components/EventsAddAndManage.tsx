@@ -15,7 +15,7 @@ import {Label} from "@/components/ui/label"
 import {PlusIcon} from "lucide-react";
 import {GearIcon} from "@radix-ui/react-icons";
 import {Textarea} from "@/components/ui/textarea";
-import {createEvent} from "@/actions";
+import {createEvent} from "@/lib/actions";
 import Link from "next/link";
 
 
@@ -23,7 +23,7 @@ const EventsAddAndManage = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [formData, setFormData] = useState({
         title: '',
-        start_date: '',
+        event_date: '',
         start_time: '',
         end_time: '',
         venue: '',
@@ -42,7 +42,7 @@ const EventsAddAndManage = () => {
         createEvent(formData).then(() => {
             setFormData({
                 title: '',
-                start_date: '',
+                event_date: '',
                 start_time: '',
                 end_time: '',
                 venue: '',
@@ -87,11 +87,11 @@ const EventsAddAndManage = () => {
                         </div>
 
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="start_date" className="text-right">
+                            <Label htmlFor="event_date" className="text-right">
                                 Date
                             </Label>
-                            <Input required type="date" id="start_date" className="col-span-3"
-                                   value={formData.start_date} onChange={handleInputChange}/>
+                            <Input required type="date" id="event_date" className="col-span-3"
+                                   value={formData.event_date} onChange={handleInputChange}/>
                         </div>
 
                         <div className="grid grid-cols-4 items-center gap-4">
