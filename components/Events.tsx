@@ -10,38 +10,20 @@ import {Button} from "@/components/ui/button";
 import {EventType} from "@/lib/types";
 import {convertTo12HourFormat} from "@/lib/helpers";
 
-// // Mock data for events
-// const events = [
-//     {
-//         id: 1,
-//         title: "UIU Job Fair 2024",
-//         start_date: "2024-03-15",
-//         end_date: "2024-03-15",
-//         start_time: "10:00:00",
-//         end_time: "16:00:00",
-//         venue: "UIU Auditorium",
-//         organizer: "UIU Career Office",
-//         category: "Career Events",
-//         description: "Connect with top employers and explore career opportunities at the annual UIU Job Fair.",
-//         registration_link: "#",
-//     },
-//     // Add more events here...
-// ]
-
 function Events({events}: { events: EventType[] }) {
     const [activeTab, setActiveTab] = useState("all")
 
-    console.log(events)
-
     const filteredEvents = activeTab === "all" ? events : events.filter(event => event.category === activeTab)
+
+    console.log(new Date())
     return (
         <>
             <Tabs defaultValue="all" className="mb-6 mx-auto">
                 <TabsList color="green">
                     <TabsTrigger value="all" onClick={() => setActiveTab("all")}>All Events</TabsTrigger>
-                    <TabsTrigger value="official" onClick={() => setActiveTab("Official Events")}>Official</TabsTrigger>
-                    <TabsTrigger value="club" onClick={() => setActiveTab("Club Events")}>Club</TabsTrigger>
-                    <TabsTrigger value="other" onClick={() => setActiveTab("Other Activities")}>Other
+                    <TabsTrigger value="official" onClick={() => setActiveTab("official")}>Official</TabsTrigger>
+                    <TabsTrigger value="club" onClick={() => setActiveTab("club")}>Club</TabsTrigger>
+                    <TabsTrigger value="other" onClick={() => setActiveTab("other")}>Other
                         Activities</TabsTrigger>
                 </TabsList>
             </Tabs>
@@ -51,15 +33,19 @@ function Events({events}: { events: EventType[] }) {
                         <CardHeader className="relative">
                             {/*<img src={event.image} alt={event.title} className="w-full h-40 object-cover rounded-t-lg"/>*/}
                             <CardTitle className="text-xl">{event.title}</CardTitle>
-                            <CardDescription>{event.category}</CardDescription>
-                            <Badge className={`bg-green-400 absolute right-0 top-0 mr-2`} variant="default">Ongoing</Badge>
+                            <CardDescription>{event.category.toUpperCase()}</CardDescription>
+                            {
+                                new Date(event.start_date).toDateString() == new Date().toDateString() && (
+                                    <Badge className={`bg-green-400 absolute right-0 top-0 mr-2`} variant="default">Today</Badge>)
+                            }
+
 
                         </CardHeader>
                         <CardContent>
                             <div className="space-y-2">
                                 <div className="flex items-center">
                                     <Calendar className="mr-2 h-4 w-4"/>
-                                    <span>{event.start_date.toDateString()}</span>
+                                    <span>{new Date(event.start_date).toDateString()}</span>
                                 </div>
                                 <div className="flex items-center">
                                     <Clock className="mr-2 h-4 w-4"/>
