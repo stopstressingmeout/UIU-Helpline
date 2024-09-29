@@ -63,8 +63,9 @@ export async function POST(req: Request) {
 
     if (eventType === 'user.created') {
         try {
-            await sql`INSERT INTO Users (id,first_name,last_name) VALUES (${payload.data.id}, ${payload.data.first_name}, ${payload.data.last_name});`;
+            await sql`INSERT INTO users (user_id,first_name,last_name,role) VALUES (${payload.data.id}, ${payload.data.first_name}, ${payload.data.last_name},"user");`;
             console.log('User created')
+            console.log(payload.data)
             return NextResponse.json({message: 'User created'}, {status: 200})
         } catch (error) {
             return NextResponse.json({error}, {status: 500});
