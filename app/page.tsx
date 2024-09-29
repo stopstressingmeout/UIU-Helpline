@@ -32,7 +32,7 @@ export default function Home() {
                             },
                             {
                                 icon: HomeIcon,
-                                title: "Housing Solutions",
+                                title: "Accommodation Solutions",
                                 description: "Discover accommodation options near the campus."
                             },
                             {

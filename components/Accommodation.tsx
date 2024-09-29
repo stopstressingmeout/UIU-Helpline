@@ -3,7 +3,7 @@ import {useState} from 'react'
 import {DollarSign, Map, PhoneCall, Users} from 'lucide-react'
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs"
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
-import {RoomType} from "@/lib/types";
+import {AccommodationType} from "@/lib/types";
 import {Badge} from "@/components/ui/badge";
 import {
     Dialog,
@@ -16,10 +16,10 @@ import {
 import {DialogBody} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
 
 
-function Housing({rooms}: { rooms: RoomType[] }) {
+function Accommodation({accommodations}: { accommodations: AccommodationType[] }) {
     const [activeTab, setActiveTab] = useState("all")
 
-    const filteredRooms = activeTab === "all" ? rooms : rooms.filter(room => room.room_type === activeTab)
+    const filteredRooms = activeTab === "all" ? accommodations : accommodations.filter(accommodation => accommodation.room_type === activeTab)
 
     console.log(filteredRooms)
     return (
@@ -33,7 +33,7 @@ function Housing({rooms}: { rooms: RoomType[] }) {
             </Tabs>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredRooms.map((room) => (
-                    <div key={room.room_id} className="overflow-hidden rounded-lg border relative">
+                    <div key={room.accommodation_id} className="overflow-hidden rounded-lg border relative">
                         <Badge className="absolute top-2 right-2"
                                variant="secondary">{room.room_type.toUpperCase()}</Badge>
                         <img
@@ -144,4 +144,4 @@ function Housing({rooms}: { rooms: RoomType[] }) {
     );
 }
 
-export default Housing;
+export default Accommodation;
