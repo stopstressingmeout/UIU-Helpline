@@ -22,6 +22,10 @@ const PageLinks=[
         href: "/accommodation"
     },
     {
+      title: "Services",
+        href: "/services"
+    },
+    {
         title: "Faculty",
         href: "/faculty"
     },
@@ -34,7 +38,6 @@ const PageLinks=[
 
 export default function Navbar() {
     const pathname = usePathname()
-    console.log(pathname)
     return (
         <header className="flex h-20 shrink-0 items-center px-4 md:px-6 w-full border-b">
             <Sheet>
@@ -53,7 +56,7 @@ export default function Navbar() {
                         {
                             PageLinks.map((link, index) => (
                                 <Link key={index} href={link.href} className={`flex w-full items-center py-2 text-lg font-semibold  justify-center ${
-                                    pathname === link.href ? "bg-orange-500/50 text-white" : "text-black hover:bg-accent"
+                                    pathname.startsWith(link.href) ? "bg-orange-500/50 text-white" : "text-black hover:bg-accent"
                                 }`} prefetch={false}>
                                     {link.title}
                                 </Link>
@@ -72,7 +75,7 @@ export default function Navbar() {
                             <NavigationMenuLink key={index} asChild>
                                 <Link href={link.href}
                                         className={`px-4 py-2 text-lg transition-colors  rounded-md ${
-                                            pathname === link.href ? "text-orange-500" : "text-gray-900 hover:bg-gray-100"
+                                            pathname.startsWith(link.href) ? "text-orange-500" : "text-gray-900 hover:bg-gray-100"
                                         }`}
                                         prefetch={false}>
                                         {link.title}

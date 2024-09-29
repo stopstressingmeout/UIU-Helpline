@@ -13,6 +13,24 @@ export type EventType = {
     created_on?: string;
 };
 
+export type ServiceType = {
+    service_id?: number;          // Unique ID for each service
+    title: string;               // Title of the service
+    description: string;        // Optional description of the service
+    created_on?: string;          // Date and time when the service was created (ISO string)
+    creator_id?: string;          // ID of the student offering the service
+    phone_number?: string;       // Optional phone number to contact the service provider
+    location?: string;           // Optional location of the service
+    image_url?: string;          // Optional URL to an image representing the service
+    social_url_1?: string;       // Optional first social media or external link
+    social_url_2?: string;       // Optional second social media or external link
+    price?: number;              // Optional price for the service (can be null or undefined)
+    type: "food" | "tutoring" | "other";
+    first_name?: string;
+    last_name?: string;
+};
+
+
 
 export type AccommodationType = {
     accommodation_id?: number;              // Unique identifier for the room

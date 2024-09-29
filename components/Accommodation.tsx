@@ -1,6 +1,6 @@
 "use client";
 import {useState} from 'react'
-import {DollarSign, Map, PhoneCall, Users} from 'lucide-react'
+import {DollarSign, Map, PhoneCall, SquareArrowOutUpRight, Users} from 'lucide-react'
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs"
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
 import {AccommodationType} from "@/lib/types";
@@ -14,6 +14,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import {DialogBody} from "next/dist/client/components/react-dev-overlay/internal/components/Dialog";
+import Link from "next/link";
 
 
 function Accommodation({accommodations}: { accommodations: AccommodationType[] }) {
@@ -116,7 +117,15 @@ function Accommodation({accommodations}: { accommodations: AccommodationType[] }
                                                         </TooltipContent>
                                                     </Tooltip>
                                                 </TooltipProvider>
+                                                <div className="flex gap-2 justify-center items-center">
+
                                                 <span>{room.location}</span>
+                                                    {
+                                                        room.map_url && <Link target="_blank" href={room.map_url}>
+                                                        <SquareArrowOutUpRight className="w-4 h-4 text-gray-700 hover:text-blue-700"/>
+                                                        </Link>
+                                                    }
+                                                </div>
                                             </div>
 
                                         </div>
