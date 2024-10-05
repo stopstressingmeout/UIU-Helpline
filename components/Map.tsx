@@ -2,51 +2,33 @@
 import {MapContainer, Marker, Popup, TileLayer} from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import {LocationType} from "@/lib/types";
+import Link from "next/link";
 
 
-type Location = {
-    id: number
-    name: string
-    type: 'hospital' | 'restaurant' | 'hostel' | 'apartment' | 'recreation' | 'shopping'
-    position: [number, number]
-}
+const Map = ({locations}: { locations: LocationType[] }) => {
 
-const locations: Location[] = [
-    {id: 1, name: 'Shopping 1', type: 'shopping', position: [23.80204819081027, 90.45160677398712]},
-    {id: 2, name: 'Hostel 2', type: 'hostel', position: [23.799577338819613, 90.45793059633921]},
-    {id: 3, name: 'Apartment 3', type: 'apartment', position: [23.798298103437, 90.44121662263655]},
-    {id: 4, name: 'Restuarant 4', type: 'restaurant', position: [23.80766303313623, 90.45755113402664]},
-    {id: 5, name: 'Apartment 5', type: 'apartment', position: [23.80747003363949, 90.44384322493825]},
-    {id: 6, name: 'Apartment 6', type: 'apartment', position: [23.807740308724266, 90.45498215542707]},
-    {id: 7, name: 'Recreation 7', type: 'recreation', position: [23.794410923371668, 90.44591059720001]},
-    {id: 8, name: 'Shopping 8', type: 'shopping', position: [23.79005147117266, 90.44295259553026]},
-    {id: 9, name: 'Hospital 9', type: 'hospital', position: [23.802047375172215, 90.45004175424044]},
-    {id: 10, name: 'Shopping 10', type: 'shopping', position: [23.791916641970808, 90.45238738743159]}
-]
+    console.log(locations)
 
-const Map = () => {
-
-    const getMarkerColor = (type: Location['type']) => {
+    const getMarkerColor = (type: LocationType['location_type']) => {
         switch (type) {
             case 'hospital':
                 return 'red';
             case 'restaurant':
                 return 'green';
-            case 'hostel':
-                return 'blue';
             case 'shopping':
-                return 'orange';
-            case 'apartment':
+                return 'yellow';
+            case 'accommodation':
                 return 'violet';
             case 'recreation':
-                return 'yellow';
+                return 'blue';
             default:
-                return 'gray';
+                return 'grey';
         }
     };
 
 
-    const createCustomIcon = (type: Location['type']) => {
+    const createCustomIcon = (type: LocationType['location_type']) => {
         return new L.Icon({
             iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${getMarkerColor(
                 type
@@ -59,9 +41,8 @@ const Map = () => {
         })
     }
     return (
-        <div className="flex-grow relative p-5">
+        <div className="flex-grow relative py-5">
             <MapContainer
-
                 scrollWheelZoom={false}
                 center={[23.79807921073996, 90.44974218159861]}
                 zoom={16}
@@ -71,21 +52,39 @@ const Map = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[23.79807921073996, 90.44974218159861]} icon={new L.Icon({
-                    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png`,
-                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                    iconSize: [35, 51],
-                    iconAnchor: [22, 51],
-                    popupAnchor: [1, -34],
-                    shadowSize: [51, 51],
-                })}>
-                    <Popup>
-                        United International University
-                    </Popup>
-                </Marker>
                 {locations.map((location) => (
-                    <Marker key={location.id} position={location.position} icon={createCustomIcon(location.type)}>
-                        <Popup>{location.name}</Popup>
+                    <Marker key={location.location_id} position={[location.latitude, location.longitude]}
+                            icon={createCustomIcon(location.location_type)}>
+                        <Popup>
+                            <h1 className="font-bold">{location.name}</h1>
+                            <p>{location.address}</p>
+                            <p>{location.description}</p>
+                            {
+                                location.phone_number && <div><a href={`tel:${
+                                    location.phone_number
+                                }`}>
+                                    {location.phone_number}
+                                </a></div>
+                            }
+                            {
+                                location.page_link && <div>
+
+                                    <Link
+                                        className={"text-blue-500 my-2 text-sm font-bold hover:underline"}
+                                        href={location.page_link}>
+                                        Visit Page
+                                    </Link>
+                                </div>
+                            }
+                            {
+                                location.map_link && <div><Link
+                                    className={"text-blue-500 my-2 text-sm font-bold hover:underline"}
+                                    href={location.map_link}>
+                                    View on Google Maps
+                                </Link></div>
+                            }
+
+                        </Popup>
                     </Marker>
                 ))}
             </MapContainer>
@@ -101,21 +100,20 @@ const Map = () => {
                     <span>Restaurants</span>
                 </div>
                 <div className="flex items-center">
-                    <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-                    <span>Hostels</span>
-                </div>
-
-                <div className="flex items-center">
-                    <div className="w-4 h-4 bg-amber-600 rounded-full mr-2"></div>
+                    <div className="w-4 h-4 bg-yellow-400 rounded-full mr-2"></div>
                     <span>Shopping</span>
                 </div>
                 <div className="flex items-center">
                     <div className="w-4 h-4 bg-purple-500 rounded-full mr-2"></div>
-                    <span>Apartments</span>
+                    <span>Accommodation</span>
                 </div>
                 <div className="flex items-center">
-                    <div className="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                    <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
                     <span>Recreation</span>
+                </div>
+                <div className="flex items-center">
+                    <div className="w-4 h-4 bg-gray-500 rounded-full mr-2"></div>
+                    <span>Others</span>
                 </div>
 
             </div>

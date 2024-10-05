@@ -52,3 +52,25 @@ export type AccommodationType = {
     last_name?: string;
     available_from: string;
 };
+
+export type LocationType= {
+    location_id?: number; // The unique identifier for the location (auto-incremented)
+    name: string; // The name of the location
+    location_type: "hospital" | "restaurant" | "accommodation" | "shopping" | "recreation" | "others"; // The type of location
+    latitude: number; // The latitude of the location
+    longitude: number; // The longitude of the location
+    map_link?: string; // A link to a map location (optional)
+    phone_number?: string; // Contact number for the location (optional)
+    page_link?: string; // Official website or page link (optional)
+    address?: string; // The physical address of the location (optional)
+    description?: string; // A brief description of the location (optional)
+    created_on?: string; // The timestamp when the record was created (optional, can be in ISO format)
+}
+
+
+export type UserType = {
+    first_name: string;
+    last_name: string;
+    user_id: string;
+    role: "default" | "admin";
+}

@@ -1,6 +1,6 @@
 "use server";
 
-import {AccommodationType, EventType, ServiceType} from "@/lib/types";
+import {AccommodationType, EventType, LocationType, ServiceType, UserType} from "@/lib/types";
 import {sql} from "@vercel/postgres";
 import {currentUser} from "@clerk/nextjs/server";
 import {revalidatePath} from "next/cache";
@@ -59,4 +59,34 @@ export const deleteService = async (serviceId: number) => {
     if (!user) throw new Error("You must be logged in to delete a service")
     await sql`DELETE FROM services WHERE service_id = ${serviceId} AND creator_id = ${user.id}`
     revalidatePath('/services')
+}
+
+export const createLocation = async (locationData: LocationType) => {
+    const user = await currentUser();
+    if (!user) throw new Error("You must be logged in to create a location")
+
+    const data = await sql`SELECT * FROM users WHERE user_id = ${user.id} limit 1`
+    const adminData = data.rows as UserType[];
+
+    if (adminData[0].role != "admin") throw new Error("You have to be an admin to create a location.")
+
+    await sql`INSERT INTO locations
+    (name, latitude, longitude, map_link, phone_number, address, description, location_type,page_link )
+VALUES
+    (${locationData.name}, ${locationData.latitude}, ${locationData.longitude}, ${locationData.map_link}, ${locationData.phone_number}, ${locationData.address}, ${locationData.description}, ${locationData.location_type}, ${locationData.page_link})`
+    revalidatePath('/map/manage')
+}
+
+export const deleteLocation = async (locationId: number) => {
+
+    const user = await currentUser();
+    if (!user) throw new Error("You must be logged in to delete a location")
+
+    const data = await sql`SELECT * FROM users WHERE user_id = ${user.id} limit 1`
+    const adminData = data.rows as UserType[];
+
+    if (adminData[0].role != "admin") throw new Error("You have to be an admin to delete a location.")
+
+    await sql`DELETE FROM locations WHERE location_id = ${locationId}`
+    revalidatePath('/map/manage')
 }

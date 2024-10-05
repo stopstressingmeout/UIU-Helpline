@@ -1,5 +1,4 @@
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "@/components/ui/accordion";
-import ChatSection from "@/components/ChatSection";
 
 const FAQPage = () => {
     const faqs = [
@@ -44,9 +43,7 @@ const FAQPage = () => {
                     ))}
                 </Accordion>
             </div>
-            <div className="w-full max-w-3xl mx-auto mt-10">
-                <ChatSection/>
-            </div>
+
         </div>
     );
 };

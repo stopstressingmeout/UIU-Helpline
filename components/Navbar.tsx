@@ -26,10 +26,6 @@ const PageLinks=[
         href: "/services"
     },
     {
-        title: "Faculty",
-        href: "/faculty"
-    },
-    {
         title: "FAQ",
         href: "/faq"
     }

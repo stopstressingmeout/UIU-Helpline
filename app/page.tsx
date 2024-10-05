@@ -1,5 +1,39 @@
-import {Calendar, Home as HomeIcon, Info, Map, MapPin, Phone} from "lucide-react"
-import {Card} from "@/components/ui/card";
+import {BotMessageSquare, Calendar, Home as HomeIcon, Info, Map, MapPin, Pencil, Phone, SwatchBook} from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Zap, Lock, Sparkles } from "lucide-react"
+
+const features = [
+    {
+        icon: <Zap className="h-8 w-8 text-yellow-500" />,
+        title: "Enhanced Performance",
+        description: "Boost your app's speed with our new optimization algorithms."
+    },
+    {
+        icon: <BotMessageSquare className="h-8 w-8 text-blue-500" />,
+        title: "Chatbot Integration",
+        description: "Find answers to your questions quickly with our new chatbot feature."
+    },
+    {
+        icon: <Lock className="h-8 w-8 text-green-500" />,
+        title: "Advanced Security",
+        description: "Protect your data with our state-of-the-art security features."
+    },
+    {
+        icon: <Pencil className="h-8 w-8 text-purple-500" />,
+        title: "Edit Functionality",
+        description: "Make changes to your content easily with our new editing features."
+    },
+    {
+        icon: <Sparkles className="h-8 w-8 text-pink-500" />,
+        title: "Job Board",
+        description: "Find job opportunities and internships with our new job board."
+    },
+    {
+        title: "Simplified User Experience",
+        description: "Enjoy a more intuitive user interface and experience with our new design changes.",
+        icon: <SwatchBook className="h-8 w-8 text-orange-500" />
+    }
+]
 
 export default function Home() {
     return (
@@ -51,7 +85,8 @@ export default function Home() {
                                 description: "Get answers to commonly asked questions and more."
                             },
                         ].map((feature, index) => (
-                            <Card key={index} className="flex flex-col items-center text-center p-6 group hover:shadow-lg">
+                            <Card key={index}
+                                  className="flex flex-col items-center text-center p-6 group hover:shadow-lg">
                                 <feature.icon className="h-12 w-12 mb-4 text-primary group-hover:text-orange-500"/>
                                 <h3 className="text-xl font-bold mb-2 group-hover:text-orange-500">{feature.title}</h3>
                                 <p className="text-muted-foreground group-hover:text-orange-300">{feature.description}</p>
@@ -75,12 +110,12 @@ export default function Home() {
                             {
                                 step: "2",
                                 title: "Explore Resources",
-                                description: "Browse through our comprehensive database of information."
+                                description: "Browse through the available services and information."
                             },
                             {
                                 step: "3",
-                                title: "Get Help",
-                                description: "Access support or connect with relevant services as needed."
+                                title: "Utilize Resources",
+                                description: "Make use of the resources to enhance your university experience."
                             },
                         ].map((item, index) => (
                             <div key={index} className="flex flex-col items-center text-center">
@@ -94,6 +129,35 @@ export default function Home() {
                         ))}
                     </div>
                 </div>
+            </section>
+            <section className="min-h-screen">
+                <div className="pt-16 pb-12 text-center">
+                    <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                        Upcoming Features
+                    </h1>
+                    <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                        Exciting new capabilities coming soon to enhance your experience
+                    </p>
+                </div>
+
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        {features.map((feature, index) => (
+                            <Card key={index} className="transition-all hover:shadow-lg">
+                                <CardHeader>
+                                    <div className="flex items-center space-x-4">
+                                        {feature.icon}
+                                        <CardTitle>{feature.title}</CardTitle>
+                                    </div>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>{feature.description}</CardDescription>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+
             </section>
         </div>
     );
