@@ -31,6 +31,9 @@ const ManageAccommodationsPage = async () => {
                         {accommodations.map((accommodation) => (
                             <Card key={accommodation.accommodation_id}>
                                 <CardHeader className="relative">
+                                    <img src={!!accommodation.image_url ? accommodation.image_url : "/placeholder.jpg"}
+                                         alt={accommodation.title}
+                                         className="w-full h-40 object-cover rounded-t-lg"/>
                                     <CardTitle className="text-xl">{accommodation.title}</CardTitle>
                                     <CardDescription>{accommodation.room_type.toUpperCase()}</CardDescription>
                                 </CardHeader>

@@ -17,7 +17,7 @@ function Services({services}: { services: ServiceType[] }) {
     return (
         <>
             <Tabs defaultValue="all" className="mb-6 mx-auto">
-                <TabsList >
+                <TabsList>
                     <TabsTrigger value="all" onClick={() => setActiveTab("all")}>All Events</TabsTrigger>
                     <TabsTrigger value="food" onClick={() => setActiveTab("food")}>Food</TabsTrigger>
                     <TabsTrigger value="tutoring" onClick={() => setActiveTab("tutoring")}>Tutoring</TabsTrigger>
@@ -29,12 +29,17 @@ function Services({services}: { services: ServiceType[] }) {
                 {filteredServices.map((service) => (
                     <Card key={service.service_id}>
                         <CardHeader className="relative">
-                            {/*<img src={event.image} alt={event.title} className="w-full h-40 object-cover rounded-t-lg"/>*/}
-                            <CardTitle className="text-xl">{service.title}</CardTitle>
+                            <img
+                                src={!!service.image_url ? service.image_url : "/placeholder.jpg"}
+                                alt={service.title}
+                                className="object-cover w-full h-48"
+                                width={400}
+                                height={200}
+                            /> <CardTitle className="text-xl">{service.title}</CardTitle>
 
-                                <ScrollArea className="h-[150px] w-full rounded-md mt-4">
-                                    {service.description}
-                                </ScrollArea>
+                            <ScrollArea className="h-[150px] w-full rounded-md mt-4">
+                                {service.description}
+                            </ScrollArea>
 
                             <Badge className={`bg-gray-400 absolute right-0 top-0 mr-2`}
                                    variant="default">{service.type.toUpperCase()}</Badge>

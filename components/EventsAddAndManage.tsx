@@ -17,10 +17,13 @@ import {GearIcon} from "@radix-ui/react-icons";
 import {Textarea} from "@/components/ui/textarea";
 import {createEvent} from "@/lib/actions";
 import Link from "next/link";
+import {UploadButton} from "@/lib/utils";
+import Image from "next/image";
 
 
 const EventsAddAndManage = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [uploadImage, setUploadImage] = useState<undefined | string>(undefined)
     const [formData, setFormData] = useState({
         title: '',
         event_date: '',
@@ -39,7 +42,7 @@ const EventsAddAndManage = () => {
             alert("End time cannot be before start time!");
             return;
         }
-        createEvent(formData).then(() => {
+        createEvent({...formData,img_url:uploadImage ?? ""}).then(() => {
             setFormData({
                 title: '',
                 event_date: '',
@@ -87,6 +90,31 @@ const EventsAddAndManage = () => {
                         </div>
 
                         <div className="grid grid-cols-4 items-center gap-4">
+                            <Label className="text-right">
+                                Image
+                            </Label>
+                            <div className="col-span-3">
+                                {
+                                    uploadImage ? (
+                                            <Image src={uploadImage} alt="Event Image" width={100} height={100}/>)
+                                        :
+                                        <UploadButton
+
+                                            endpoint="imageUploader"
+
+                                            onClientUploadComplete={(res) => {
+                                                res && res[0].url && setUploadImage(res[0].url)
+                                            }}
+                                            onUploadError={(error: Error) => {
+                                                // Do something with the error.
+                                                console.log(error)
+                                            }}
+                                        />
+                                }
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="event_date" className="text-right">
                                 Date
                             </Label>
@@ -130,7 +158,7 @@ const EventsAddAndManage = () => {
                             <Label htmlFor="category" className="text-right">
                                 Category
                             </Label>
-                            <select id="category"  className="col-span-3" onChange={handleInputChange}>
+                            <select id="category" className="col-span-3" onChange={handleInputChange}>
                                 <option value="official">Official</option>
                                 <option value="club">Club</option>
                                 <option value="other">Other</option>

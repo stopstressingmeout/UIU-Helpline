@@ -31,7 +31,7 @@ function Events({events}: { events: EventType[] }) {
                 {filteredEvents.map((event) => (
                     <Card key={event.event_id}>
                         <CardHeader className="relative">
-                            {/*<img src={event.image} alt={event.title} className="w-full h-40 object-cover rounded-t-lg"/>*/}
+                            <img src={!!event.img_url ? event.img_url: "/placeholder.jpg"} alt={event.title} className="w-full h-40 object-cover rounded-t-lg"/>
                             <CardTitle className="text-xl">{event.title}</CardTitle>
                             <CardDescription>{event.category.toUpperCase()}</CardDescription>
                             {

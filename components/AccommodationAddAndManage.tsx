@@ -17,13 +17,16 @@ import {GearIcon} from "@radix-ui/react-icons";
 import {Textarea} from "@/components/ui/textarea";
 import {createAccommodation} from "@/lib/actions";
 import Link from "next/link";
+import Image from "next/image";
+import {UploadButton} from "@/lib/utils";
 
 
 const AccommodationAddAndManage = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [uploadImage, setUploadImage] = useState<undefined | string>(undefined)
+
     const [formData, setFormData] = useState({
         title: '',
-        image_url: '',
         location: '',
         map_url: '',
         capacity: 0,
@@ -38,10 +41,9 @@ const AccommodationAddAndManage = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        createAccommodation(formData).then(() => {
+        createAccommodation({...formData,image_url:uploadImage ?? ""}).then(() => {
             setFormData({
                 title: '',
-                image_url: '',
                 location: '',
                 map_url: '',
                 capacity: 0,
@@ -101,13 +103,28 @@ const AccommodationAddAndManage = () => {
                                       value={formData.description} onChange={handleInputChange}/>
                         </div>
 
-                        {/* Image URL */}
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="image_url" className="text-right">
-                                Image URL
+                            <Label className="text-right">
+                                Image
                             </Label>
-                            <Input id="image_url" placeholder="Image URL" className="col-span-3"
-                                   value={formData.image_url} onChange={handleInputChange}/>
+                            <div className="col-span-3">
+                                {
+                                    uploadImage ? (
+                                            <Image src={uploadImage} alt="Event Image" width={100} height={100}/>)
+                                        :
+                                        <UploadButton
+
+                                            endpoint="imageUploader"
+                                            onClientUploadComplete={(res) => {
+                                                res && res[0].url && setUploadImage(res[0].url)
+                                            }}
+                                            onUploadError={(error: Error) => {
+                                                // Do something with the error.
+                                                console.log(error)
+                                            }}
+                                        />
+                                }
+                            </div>
                         </div>
 
                         {/* Location */}

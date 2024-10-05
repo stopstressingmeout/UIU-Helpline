@@ -38,7 +38,7 @@ function Accommodation({accommodations}: { accommodations: AccommodationType[] }
                         <Badge className="absolute top-2 right-2"
                                variant="secondary">{room.room_type.toUpperCase()}</Badge>
                         <img
-                            src={room.image_url}
+                            src={!!room.image_url ? room.image_url : "/placeholder.jpg"}
                             alt={room.title}
                             className="object-cover w-full h-48"
                             width={400}
@@ -64,7 +64,7 @@ function Accommodation({accommodations}: { accommodations: AccommodationType[] }
                                 <DialogContent className="bg-white max-h-full overflow-y-auto">
                                     <DialogHeader>
                                         <img
-                                            src={room.image_url}
+                                            src={!!room.image_url ? room.image_url : "/placeholder.jpg"}
                                             alt={room.title}
                                             className="object-cover w-full h-48"
                                             width={400}

@@ -6,6 +6,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {Suspense} from "react";
 import Loading from "@/app/loading";
+import {NextSSRPlugin} from "@uploadthing/react/next-ssr-plugin";
+import {extractRouterConfig} from "uploadthing/server";
+import {ourFileRouter} from "@/app/api/uploadthing/core";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -31,12 +34,18 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
+
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col justify-center items-center w-full min-h-screen`}
             >
+
             <Navbar/>
             <div className="flex-1 w-full flex justify-center ">
-                <Suspense fallback={<Loading />}>{children}</Suspense>
+                <Suspense fallback={<Loading />}>
+                    <NextSSRPlugin
+                        routerConfig={extractRouterConfig(ourFileRouter)}
+                    />
+                    {children}</Suspense>
 
             </div>
             <Footer/>

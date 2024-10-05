@@ -11,6 +11,7 @@ export type EventType = {
     registration_link: string;
     creator_id?: string;
     created_on?: string;
+    img_url?: string;
 };
 
 export type ServiceType = {

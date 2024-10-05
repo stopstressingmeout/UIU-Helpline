@@ -31,6 +31,13 @@ const ManageServicePage = async () => {
                         {services.map((service) => (
                             <Card key={service.service_id}>
                                 <CardHeader className="relative">
+                                    <img
+                                        src={!!service.image_url ? service.image_url : "/placeholder.jpg"}
+                                        alt={service.title}
+                                        className="object-cover w-full h-48"
+                                        width={400}
+                                        height={200}
+                                    />
                                     <CardTitle className="text-xl">{service.title}</CardTitle>
                                     <ScrollArea className="h-[150px] w-full rounded-md mt-4">
                                         {service.description}

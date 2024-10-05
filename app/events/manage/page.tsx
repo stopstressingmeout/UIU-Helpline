@@ -29,12 +29,14 @@ const ManageEventsPage = async () => {
                         {events.map((event) => (
                             <Card key={event.event_id}>
                                 <CardHeader className="relative">
+                                    <img src={!!event.img_url ? event.img_url: "/placeholder.jpg"} alt={event.title}
+                                         className="w-full h-40 object-cover rounded-t-lg"/>
                                     <CardTitle className="text-xl">{event.title}</CardTitle>
                                     <CardDescription>{event.category.toUpperCase()}</CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <div className="space-y-2">
-                                        <div className="flex items-center">
+                                    <div className="flex items-center">
                                             <Calendar className="mr-2 h-4 w-4"/>
                                             <span>{new Date(event.event_date).toDateString()}</span>
                                         </div>
