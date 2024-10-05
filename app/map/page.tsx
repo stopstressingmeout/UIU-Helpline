@@ -17,8 +17,7 @@ const MapPage = async () => {
 
     const data = await sql`SELECT * FROM users WHERE user_id = ${user.id} limit 1`
     const adminData = data.rows as UserType[];
-
-    if (adminData[0].role !== "admin") return null;
+    
     return (
         <div className="container flex flex-col h-screen p-2 md:p-5 relative">
             {
