@@ -141,7 +141,7 @@ const AccommodationAddAndManage = () => {
                             <Label htmlFor="latitude" className="text-right">
                                 Latitude
                             </Label>
-                            <Input required id="latitude" type="number" min={0} placeholder="Latitude"
+                            <Input required id="latitude" placeholder="Latitude"
                                    className="col-span-3"
                                    value={formData.latitude} onChange={handleInputChange}/>
                         </div>
@@ -151,7 +151,7 @@ const AccommodationAddAndManage = () => {
                             <Label htmlFor="longitude" className="text-right">
                                 Longitude
                             </Label>
-                            <Input required id="longitude" type="number" min={0} placeholder="Longitude"
+                            <Input required id="longitude"  placeholder="Longitude"
                                    className="col-span-3"
                                    value={formData.longitude} onChange={handleInputChange}/>
                         </div>
