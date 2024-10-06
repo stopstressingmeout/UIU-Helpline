@@ -4,7 +4,24 @@ const FAQPage = () => {
     const faqs = [
         {
             question: "What is the Shuttle schedule?",
-            answer: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            answer: `From Notun Bazar:
+07.30 AM - 08.45 AM
+09.25 AM - 09.35 AM
+10.45 AM - 10.55 AM
+12.05 PM - 12.15 PM
+01.25 PM - 01.35 PM
+02.45 PM - 02.55 PM
+06.10 PM
+From UIU:
+10.05 AM
+11.25 AM
+12.45 PM
+02.05 PM
+03.25 PM
+04.40 PM
+05.45 PM
+07.00 PM
+09.40 PM`
         },
         {
             question: "Where can I find the transportation schedule?",
