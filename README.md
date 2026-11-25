@@ -2,6 +2,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Use Node.js 26 or newer. With nvm-windows, install and activate it with:
+
+```bash
+nvm install 26
+nvm use 26
+```
+
+Unlike some nvm implementations, nvm-windows does not automatically read `.nvmrc`.
+
 First, run the development server:
 
 ```bash
